@@ -10,12 +10,12 @@ package model;
  */
 public class Item {
     private int id;
-    private String itemName; //text field data
-    private String manufacturer; //text field data
+    private String itemName; 
+    private String manufacturer; 
     private String skuNo;
-    private String warranty;
+    private String quantity;
     private String category; 
-    private String active; // dropdown data
+    private String active; 
 
     public int getId() {
         return id;
@@ -49,12 +49,12 @@ public class Item {
         this.skuNo = skuNo;
     }
 
-    public String getWarranty() {
-        return warranty;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public void setWarranty(String warranty) {
-        this.warranty = warranty;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getCategory() {

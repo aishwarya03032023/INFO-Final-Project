@@ -95,7 +95,7 @@
                 <Column editable="true" title="Manufacturer" type="java.lang.Object"/>
                 <Column editable="true" title="SKU Number" type="java.lang.Object"/>
                 <Column editable="true" title="Category" type="java.lang.Object"/>
-                <Column editable="true" title="Warranty Status" type="java.lang.Object"/>
+                <Column editable="true" title="Quantity" type="java.lang.Object"/>
                 <Column editable="true" title="Active" type="java.lang.Object"/>
               </Table>
             </Property>

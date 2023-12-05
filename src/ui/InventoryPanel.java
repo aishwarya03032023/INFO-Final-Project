@@ -66,7 +66,7 @@ public class InventoryPanel extends javax.swing.JPanel {
         ItemNameTextField.setText("");
         ManufacturerTextField.setText("");
         SKNTextField.setText("");
-        WarrantyTextField.setText("");
+        QuantityTextField.setText("");
         categoryTypeComboBox.setSelectedItem(null);
         YesRadioButton.setSelected(false); 
         NoRadioButton.setSelected(false);
@@ -83,7 +83,7 @@ public class InventoryPanel extends javax.swing.JPanel {
                 row[1] = u.getItemName();
                 row[2] = u.getManufacturer();
                 row[3] = u.getSkuNo();
-                row[4] = u.getWarranty();
+                row[4] = u.getQuantity();
                 row[5] = u.getCategory();
                 row[6] = u.getActive();
                 model.addRow(row);
@@ -113,10 +113,10 @@ public class InventoryPanel extends javax.swing.JPanel {
         categoryTypeComboBox = new javax.swing.JComboBox<>();
         YesRadioButton = new javax.swing.JRadioButton();
         NoRadioButton = new javax.swing.JRadioButton();
-        WarrantyLabel = new javax.swing.JLabel();
+        QuantityLabel = new javax.swing.JLabel();
         CategoryTypeLabel = new javax.swing.JLabel();
         submitButton = new javax.swing.JButton();
-        WarrantyTextField = new javax.swing.JTextField();
+        QuantityTextField = new javax.swing.JTextField();
         SKNLabel = new javax.swing.JLabel();
         ItemNameTextField = new javax.swing.JTextField();
         SKNTextField = new javax.swing.JTextField();
@@ -163,8 +163,8 @@ public class InventoryPanel extends javax.swing.JPanel {
         genderButtonGroup.add(NoRadioButton);
         NoRadioButton.setText("No");
 
-        WarrantyLabel.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        WarrantyLabel.setText("Warranty Duration");
+        QuantityLabel.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        QuantityLabel.setText("Quantity");
 
         CategoryTypeLabel.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         CategoryTypeLabel.setText("Category");
@@ -178,9 +178,9 @@ public class InventoryPanel extends javax.swing.JPanel {
             }
         });
 
-        WarrantyTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+        QuantityTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                WarrantyTextFieldKeyReleased(evt);
+                QuantityTextFieldKeyReleased(evt);
             }
         });
 
@@ -228,7 +228,7 @@ public class InventoryPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Item Name", "Manufacturer", "SKU Number", "Category", "Warranty Status", "Active"
+                "ID", "Item Name", "Manufacturer", "SKU Number", "Category", "Quantity", "Active"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -280,17 +280,16 @@ public class InventoryPanel extends javax.swing.JPanel {
                     .addComponent(SKNLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(WarrantyLabel)
-                                .addComponent(ManufacturerLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(itemNameLabel, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(ManufacturerLabel)
+                            .addComponent(itemNameLabel)
                             .addComponent(CategoryTypeLabel)
-                            .addComponent(activeLabel))
+                            .addComponent(activeLabel)
+                            .addComponent(QuantityLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ManufacturerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ItemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(SKNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(WarrantyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(QuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(YesRadioButton)
@@ -336,8 +335,8 @@ public class InventoryPanel extends javax.swing.JPanel {
                     .addComponent(SKNTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(WarrantyLabel)
-                    .addComponent(WarrantyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(QuantityLabel)
+                    .addComponent(QuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -370,7 +369,7 @@ public class InventoryPanel extends javax.swing.JPanel {
         newItem.setItemName(ItemNameTextField.getText());
         newItem.setManufacturer(ManufacturerTextField.getText());
         newItem.setSkuNo(SKNTextField.getText());
-        newItem.setWarranty(WarrantyTextField.getText());
+        newItem.setQuantity(QuantityTextField.getText());
         newItem.setCategory(categoryTypeComboBox.getSelectedItem().toString());
         if (YesRadioButton.isSelected() == true) {
             newItem.setActive("Yes");
@@ -393,25 +392,16 @@ public class InventoryPanel extends javax.swing.JPanel {
         this.clearFormFields();
     }//GEN-LAST:event_submitButtonActionPerformed
 
-    private void WarrantyTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_WarrantyTextFieldKeyReleased
+    private void QuantityTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_QuantityTextFieldKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_WarrantyTextFieldKeyReleased
+    }//GEN-LAST:event_QuantityTextFieldKeyReleased
 
     private void ItemNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ItemNameTextFieldActionPerformed
 
     }//GEN-LAST:event_ItemNameTextFieldActionPerformed
 
     private void ItemNameTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ItemNameTextFieldKeyReleased
-        // TODO add your handling code here:
-//        String pattern = "^[a-zA-Z]{0,15}$";
-//        Pattern pat = Pattern.compile(pattern);
-//        Matcher match = pat.matcher(ItemNameTextField.getText());
-//        if(!match.matches()){
-//            fLabel.setText("Enter only text data");
-//        }
-//        else{
-//            fLabel.setText(null);
-//        }
+      
     }//GEN-LAST:event_ItemNameTextFieldKeyReleased
 
     private void SKNTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SKNTextFieldKeyReleased
@@ -419,16 +409,7 @@ public class InventoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_SKNTextFieldKeyReleased
 
     private void ManufacturerTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ManufacturerTextFieldKeyReleased
-        // TODO add your handling code here:
-//        String pattern = "^[a-zA-Z]{0,30}$";
-//        Pattern pat = Pattern.compile(pattern);
-//        Matcher match = pat.matcher(ManufacturerTextField.getText());
-//        if(!match.matches()){
-//            lLabel.setText("Enter only text data");
-//        }
-//        else{
-//            lLabel.setText(null);
-//        }
+       
     }//GEN-LAST:event_ManufacturerTextFieldKeyReleased
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
@@ -442,7 +423,7 @@ public class InventoryPanel extends javax.swing.JPanel {
         ItemNameTextField.setText(selectedItem.getItemName());
         ManufacturerTextField.setText(selectedItem.getManufacturer());
         SKNTextField.setText(selectedItem.getSkuNo());
-        WarrantyTextField.setText(selectedItem.getWarranty());
+        QuantityTextField.setText(selectedItem.getQuantity());
         categoryTypeComboBox.setSelectedItem(selectedItem.getCategory());
         if(selectedItem.getActive()!=null && selectedItem.getActive().equals("Yes"))
         {
@@ -507,10 +488,10 @@ public class InventoryPanel extends javax.swing.JPanel {
     private javax.swing.JLabel ManufacturerLabel;
     private javax.swing.JTextField ManufacturerTextField;
     private javax.swing.JRadioButton NoRadioButton;
+    private javax.swing.JLabel QuantityLabel;
+    private javax.swing.JTextField QuantityTextField;
     private javax.swing.JLabel SKNLabel;
     private javax.swing.JTextField SKNTextField;
-    private javax.swing.JLabel WarrantyLabel;
-    private javax.swing.JTextField WarrantyTextField;
     private javax.swing.JRadioButton YesRadioButton;
     private javax.swing.JLabel activeLabel;
     private javax.swing.JComboBox<String> categoryTypeComboBox;

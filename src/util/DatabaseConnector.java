@@ -31,13 +31,13 @@ public class DatabaseConnector {
      */
     public static void addUser(Item user) {
         //add to database
-        String query = "INSERT INTO data(ItemName,Manufacturer,SKU,Warranty,Category,Active) VALUES(?,?,?,?,?,?)";
+        String query = "INSERT INTO data(ItemName,Manufacturer,SKU,Quantity,Category,Active) VALUES(?,?,?,?,?,?)";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, user.getItemName());
             stmt.setString(2, user.getManufacturer());
             stmt.setString(3, user.getSkuNo());
-            stmt.setString(4, user.getWarranty());
+            stmt.setString(4, user.getQuantity());
             stmt.setString(5, user.getCategory());
             stmt.setString(6, user.getActive());
             int rows = stmt.executeUpdate();
@@ -66,7 +66,7 @@ public class DatabaseConnector {
                 newUser.setItemName(rs.getString("ItemName"));
                 newUser.setManufacturer(rs.getString("Manufacturer"));
                 newUser.setSkuNo(rs.getString("SKU"));
-                newUser.setWarranty(rs.getString("Warranty"));
+                newUser.setQuantity(rs.getString("Quantity"));
                 newUser.setCategory(rs.getString("Category"));
                 newUser.setActive(rs.getString("Active"));
                 newUser.setId(rs.getInt("ID"));
@@ -97,7 +97,7 @@ public class DatabaseConnector {
                 newItem.setItemName(rs.getString("ItemName"));
                 newItem.setManufacturer(rs.getString("Manufacturer"));
                 newItem.setSkuNo(rs.getString("SKU"));
-                newItem.setWarranty(rs.getString("Warranty"));
+                newItem.setQuantity(rs.getString("Quantity"));
                 newItem.setCategory(rs.getString("Category"));
                 newItem.setActive(rs.getString("Active"));
                 newItem.setId(rs.getInt("ID"));
@@ -135,13 +135,13 @@ public class DatabaseConnector {
      * @param newUser modified user details to be added
      */
     public static void editUser(Item oldUser, Item newUser) {
-        String query = "UPDATE data SET ItemName=?, Manufacturer=?, SKU=?, Warranty=?, Category=?, Active=? WHERE ID=?";
+        String query = "UPDATE data SET ItemName=?, Manufacturer=?, SKU=?, Quantity=?, Category=?, Active=? WHERE ID=?";
         try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, newUser.getItemName());
             stmt.setString(2, newUser.getManufacturer());
             stmt.setString(3, newUser.getSkuNo());
-            stmt.setString(4, newUser.getWarranty());
+            stmt.setString(4, newUser.getQuantity());
             stmt.setString(5, newUser.getCategory());
             stmt.setString(6, newUser.getActive());
             stmt.setInt(7, oldUser.getId());

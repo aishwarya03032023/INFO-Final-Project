@@ -77,7 +77,7 @@ public class ViewInventoryPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Item Name", "Manufacturer", "SKU Number", "Category", "Warranty Status", "Active"
+                "ID", "Item Name", "Manufacturer", "SKU Number", "Category", "Quantity", "Active"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -163,19 +163,6 @@ public class ViewInventoryPanel extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-//    private void populateData() {
-//        firstNameDataLabel.setText(this.newUser.getFirstName()); //text field data
-//        lastNameDataLabel.setText(this.newUser.getLastName()); //text field data
-//        dobDataLabel.setText(this.newUser.getDob());
-//        ageDataLabel.setText(this.newUser.getAge());
-//        emailDataLabel.setText(this.newUser.getEmail());
-//        messageDataLabel.setText(this.newUser.getMessage()); 
-//        patientTypeDataLabel.setText(this.newUser.getPatientType()); // dropdown data
-//        genderDataLabel.setText(this.newUser.getGender());
-//        ImageIcon ii = new ImageIcon(this.newUser.getPath());
-//        Image image = ii.getImage().getScaledInstance(70,80, Image.SCALE_SMOOTH);
-//        imageDataLabel.setIcon(new ImageIcon(image));
-//    }
     public void populateTable() {
         try {
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -186,7 +173,7 @@ public class ViewInventoryPanel extends javax.swing.JPanel {
                 row[1] = u.getItemName();
                 row[2] = u.getManufacturer();
                 row[3] = u.getSkuNo();
-                row[4] = u.getWarranty();
+                row[4] = u.getQuantity();
                 row[5] = u.getCategory();
                 row[6] = u.getActive();
                 model.addRow(row);
