@@ -292,9 +292,9 @@ public class ItemPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "Missing data in add items form");
                 return;
             }
-            else{
-                JOptionPane.showMessageDialog(this, "Data submitted successfully");
-            }
+//            else{
+//                JOptionPane.showMessageDialog(this, "Data submitted successfully");
+//            }
             newUser.setItemName(ItemNameTextField.getText());
             newUser.setManufacturer(ManufacturerTextField.getText());
             newUser.setSkuNo(SKNTextField.getText());
