@@ -15,6 +15,9 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.awt.Image;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -125,6 +128,7 @@ public class InventoryPanel extends javax.swing.JPanel {
         jTable2 = new javax.swing.JTable();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        exportButton = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -243,6 +247,13 @@ public class InventoryPanel extends javax.swing.JPanel {
             }
         });
 
+        exportButton.setText("Export");
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,22 +275,17 @@ public class InventoryPanel extends javax.swing.JPanel {
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(265, Short.MAX_VALUE)
+                .addContainerGap(286, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SKNLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(WarrantyLabel)
-                                    .addComponent(ManufacturerLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(itemNameLabel, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addComponent(CategoryTypeLabel)
-                                .addComponent(activeLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(editButton)
-                                .addGap(46, 46, 46)))
-                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(WarrantyLabel)
+                                .addComponent(ManufacturerLabel, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(itemNameLabel, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(CategoryTypeLabel)
+                            .addComponent(activeLabel))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ManufacturerTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ItemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -290,7 +296,12 @@ public class InventoryPanel extends javax.swing.JPanel {
                                     .addComponent(YesRadioButton)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(NoRadioButton))
-                                .addComponent(categoryTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(categoryTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(exportButton)
+                        .addGap(59, 59, 59)))
                 .addGap(248, 248, 248))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -308,7 +319,9 @@ public class InventoryPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(deleteButton)
-                    .addComponent(editButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(editButton)
+                        .addComponent(exportButton)))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ItemNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -455,6 +468,37 @@ public class InventoryPanel extends javax.swing.JPanel {
         }
         this.refreshListOfItems();
     }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        // TODO add your handling code here:
+        try {
+            DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+            int rowCount = model.getRowCount();
+            int colCount = model.getColumnCount();
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("exported_data.txt"));
+
+            // Write column names
+            for (int i = 0; i < colCount; i++) {
+                writer.write(model.getColumnName(i) + "\t");
+            }
+            writer.newLine();
+
+            // Write data
+            for (int i = 0; i < rowCount; i++) {
+                for (int j = 0; j < colCount; j++) {
+                    writer.write(model.getValueAt(i, j).toString() + "\t");
+                }
+                writer.newLine();
+            }
+
+            writer.close();
+            JOptionPane.showMessageDialog(this, "Data Exported Successfully", "Export Completed", JOptionPane.PLAIN_MESSAGE);
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_exportButtonActionPerformed
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -472,6 +516,7 @@ public class InventoryPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> categoryTypeComboBox;
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
+    private javax.swing.JButton exportButton;
     private javax.swing.ButtonGroup genderButtonGroup;
     private javax.swing.JLabel imageLabel;
     private javax.swing.JLabel itemNameLabel;
