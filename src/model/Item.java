@@ -5,6 +5,10 @@
 package model;
 
 /**
+ *The Item class represents a product or item with various attributes.
+ * This class encapsulates information about the item, such as its ID,
+ * name, manufacturer, SKU (Stock Keeping Unit) number, quantity, category,
+ * and its active status.
  *
  * @author Admin
  */
