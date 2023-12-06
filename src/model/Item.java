@@ -10,6 +10,8 @@ package model;
  * name, manufacturer, SKU (Stock Keeping Unit) number, quantity, category,
  * and its active status.
  *
+ * Creates a getter and setter class
+ *
  * @author Admin
  */
 public class Item {
