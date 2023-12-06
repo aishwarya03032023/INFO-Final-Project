@@ -1,7 +1,7 @@
 ID	Item Name	Manufacturer	SKU Number	Category	Quantity	Active	
-1	StarWars	Lego	12341	1	Puzzles	Yes	
-2	BearPlushie	Funskool	12342	2	Soft Toys	Yes	
-3	RubiksCube	Funskool	12343	1	Puzzles	Yes	
-4	NintendWii	Bankrupt	12344	3	Electronics	Yes	
-5	Discontinued	Nintendo	12345	1	Soft Toys	No	
-6	TennisBall	Head	12346	5	Soft Toys	Yes	
+2	BearPlushie	Funskool	12342	Soft Toys	2	Yes	
+3	StarWars	Lego	12341	Puzzles	1	Yes	
+4	RubiksCube	Funskool	12343	Puzzles	1	No	
+5	NintendWii	Bankrupt	12344	Electronics	3	Yes	
+6	Discontinued	Nintendo	12345	Soft Toys	1	No	
+7	TennisBall	Head	12346	Soft Toys	5	Yes	

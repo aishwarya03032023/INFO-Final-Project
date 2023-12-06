@@ -37,8 +37,8 @@ public class DatabaseConnector {
             stmt.setString(1, user.getItemName());
             stmt.setString(2, user.getManufacturer());
             stmt.setString(3, user.getSkuNo());
-            stmt.setString(4, user.getQuantity());
-            stmt.setString(5, user.getCategory());
+            stmt.setString(4, user.getCategory());
+            stmt.setString(5, user.getQuantity());
             stmt.setString(6, user.getActive());
             int rows = stmt.executeUpdate();
             System.out.println("Rows impacted : " + rows);
@@ -97,8 +97,8 @@ public class DatabaseConnector {
                 newItem.setItemName(rs.getString("ItemName"));
                 newItem.setManufacturer(rs.getString("Manufacturer"));
                 newItem.setSkuNo(rs.getString("SKU"));
-                newItem.setQuantity(rs.getString("Quantity"));
                 newItem.setCategory(rs.getString("Category"));
+                newItem.setQuantity(rs.getString("Quantity"));
                 newItem.setActive(rs.getString("Active"));
                 newItem.setId(rs.getInt("ID"));
                 items.add(newItem);
@@ -141,8 +141,8 @@ public class DatabaseConnector {
             stmt.setString(1, newUser.getItemName());
             stmt.setString(2, newUser.getManufacturer());
             stmt.setString(3, newUser.getSkuNo());
-            stmt.setString(4, newUser.getQuantity());
-            stmt.setString(5, newUser.getCategory());
+            stmt.setString(4, newUser.getCategory());
+            stmt.setString(5, newUser.getQuantity());
             stmt.setString(6, newUser.getActive());
             stmt.setInt(7, oldUser.getId());
             stmt.executeUpdate();
